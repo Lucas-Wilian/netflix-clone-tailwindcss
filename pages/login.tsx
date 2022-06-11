@@ -18,7 +18,10 @@ function Login() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    if (login) {
+    }
+  };
 
   return (
     <div className='relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent'>
@@ -51,6 +54,11 @@ function Login() {
               placeholder='Email'
               className='input'
             />
+            {errors.email && (
+              <p className='p-1 text-[13px] font-light  text-orange-500'>
+                Please enter a valid email.
+              </p>
+            )}
           </label>
           <label className='inline-block w-full'>
             <input
@@ -59,9 +67,17 @@ function Login() {
               placeholder='PassWord'
               className='input'
             />
+            {errors.password && (
+              <p className='p-1 text-[13px] font-light  text-orange-500'>
+                Your password must contain between 4 and 60 characters.
+              </p>
+            )}
           </label>
 
-          <button className='w-full rounded bg-[#E50914] py-3 font-semibold'>
+          <button
+            className='w-full rounded bg-[#E50914] py-3 font-semibold'
+            onClick={() => setLogin(true)}
+          >
             Sign in
           </button>
 
@@ -70,6 +86,7 @@ function Login() {
             <button
               className='cursor-pointer text-white hover:underline'
               type='submit'
+              onClick={() => setLogin(false)}
             >
               Sign up now
             </button>
